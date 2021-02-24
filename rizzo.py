@@ -399,8 +399,8 @@ class Rizzo(object):
         if curname.startswith('sub_') and name.split('_')[0] not in {'sub', 'loc', 'unk', 'dword', 'word', 'byte'}:
             # Don't rename if the name already exists in the IDB
             if idc.get_name_ea_simple(name) == idc.BADADDR:
-                if idc.set_name(ea, name, SN_CHECK):
-                    idc.set_func_attr(ea, FUNCATTR_FLAGS, (idc.get_func_attr(ea, FUNCATTR_FLAGS) | idc.FUNC_LIB))
+                if idc.set_name(ea, name, ida_name.SN_CHECK):
+                    idc.set_func_attr(ea, idc.FUNCATTR_FLAGS, (idc.get_func_attr(ea, idc.FUNCATTR_FLAGS) | idc.FUNC_LIB))
                     # print "%s  =>  %s" % (curname, name)
                     return 1
         # else:
