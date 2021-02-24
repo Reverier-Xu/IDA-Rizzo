@@ -1,6 +1,8 @@
 # Rizzo-IDA
 Rizzo plugin ported to IDA 7.4+
 
+[简体中文](https://github.com/Reverier-Xu/Rizzo-IDA/blob/main/README-cn.md)
+
 ## Usage
 
 put `rizzo.py` into `${IDA-FOLDER}/plugins`.
