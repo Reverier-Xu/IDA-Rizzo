@@ -24,7 +24,7 @@
 'foo'函数是相当独特的，很容易为它生成一个可靠的签名，但是'bar'函数比较难以可靠地识别。然而，'foo'会调用'bar'，因此，一旦'foo'被识别，'bar'也可以通过关联来识别。
 
 这个版本的Rizzo被移植到IDA 7.4+，作者:
-* Reverier-Xu from L-team, XDU, 2021-02-24
+* Reverier
 
 原作者: 
 * Craig Heffner
