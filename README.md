@@ -26,7 +26,7 @@ The 'foo' function is fairly unique and a reliable signature is easily generated
 
 This version of Rizzo is ported to IDA 7.4+ by
 
-* Reverier-Xu from L-team, XDU, 2021-02-24
+* Reverier
 
 original authors:
 
