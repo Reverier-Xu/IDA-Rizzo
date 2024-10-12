@@ -142,21 +142,21 @@ class Rizzo(object):
         self.signatures = self.generate()
         end = time.time()
 
-        print('[Rizzo ^_^] Generated %d formal signatures and %d fuzzy signatures for %d functions in %.2f seconds.' % (len(self.signatures.formal), len(self.signatures.fuzzy), len(self.signatures.functions), (end - start)))
+        print('[Rizzo] Generated %d formal signatures and %d fuzzy signatures for %d functions in %.2f seconds.' % (len(self.signatures.formal), len(self.signatures.fuzzy), len(self.signatures.functions), (end - start)))
 
     def save(self):
-        print('[Rizzo ^_^] Saving signatures to %s...' % self.sigfile)
+        print('[Rizzo] Saving signatures to %s...' % self.sigfile)
         fp = open(self.sigfile, 'wb')
         pickle.dump(self.signatures, fp)
         fp.close()
-        print('done.')
+        print('[Rizzo] saved.')
 
     def load(self):
-        print('[Rizzo ^_^] Loading signatures from %s...' % self.sigfile)
+        print('[Rizzo] Loading signatures from %s...' % self.sigfile)
         fp = open(self.sigfile, 'rb')
         sigs = pickle.load(fp)
         fp.close()
-        print('done.')
+        print('[Rizzo] loaded.')
         return sigs
 
     @staticmethod
@@ -348,7 +348,7 @@ class Rizzo(object):
             curfunc = RizzoFunctionDescriptor(self.signatures.formal, self.signatures.functions, extsig)
             formal[curfunc] = newfunc
         end = time.time()
-        print('[Rizzo ^_^] Found %d formal matches in %.2f seconds.' % (len(formal), (end - start)))
+        print('[Rizzo] Found %d formal matches in %.2f seconds.' % (len(formal), (end - start)))
 
         # Match fuzzy function signatures
         start = time.time()
@@ -361,7 +361,7 @@ class Rizzo(object):
             if len(curfunc.blocks) == len(newfunc.blocks):
                 fuzzy[curfunc] = newfunc
         end = time.time()
-        print('[Rizzo ^_^] Found %d fuzzy matches in %.2f seconds.' % (len(fuzzy), (end - start)))
+        print('[Rizzo] Found %d fuzzy matches in %.2f seconds.' % (len(fuzzy), (end - start)))
 
         # Match string based function signatures
         start = time.time()
@@ -372,7 +372,7 @@ class Rizzo(object):
             newfunc = RizzoFunctionDescriptor(extsigs.strings, extsigs.functions, extsig)
             strings[curfunc] = newfunc
         end = time.time()
-        print('[Rizzo ^_^] Found %d string matches in %.2f seconds.' % (len(strings), (end - start)))
+        print('[Rizzo] Found %d string matches in %.2f seconds.' % (len(strings), (end - start)))
 
         # Match immediate baesd function signatures
         start = time.time()
@@ -383,7 +383,7 @@ class Rizzo(object):
             newfunc = RizzoFunctionDescriptor(extsigs.immediates, extsigs.functions, extsig)
             immediates[curfunc] = newfunc
         end = time.time()
-        print('[Rizzo ^_^] Found %d immediate matches in %.2f seconds.' % (len(immediates), (end - start)))
+        print('[Rizzo] Found %d immediate matches in %.2f seconds.' % (len(immediates), (end - start)))
 
         # Return signature matches in the order we want them applied
         # The second tuple of each match is set to True if it is a fuzzy match, e.g.:
@@ -457,26 +457,26 @@ class Rizzo(object):
                         count += self.rename(winner, name)
 
         end = time.time()
-        print('[Rizzo ^_^] Renamed %d functions in %.2f seconds.' % (count, (end - start)))
+        print('[Rizzo] Renamed %d functions in %.2f seconds.' % (count, (end - start)))
 
 
 def RizzoBuild(sigfile=None):
-    print('[Rizzo =_=] Building Rizzo signatures, this may take a few minutes...')
+    print('[Rizzo] Building Rizzo signatures, this may take a few minutes...')
     start = time.time()
     r = Rizzo(sigfile)
     r.save()
     end = time.time()
-    print('[Rizzo ^_^] Built signatures in %.2f seconds' % (end - start))
+    print('[Rizzo] Built signatures in %.2f seconds' % (end - start))
 
 
 def RizzoApply(sigfile=None):
-    print('[Rizzo =_=] Applying Rizzo signatures, this may take a few minutes...')
+    print('[Rizzo] Applying Rizzo signatures, this may take a few minutes...')
     start = time.time()
     r = Rizzo(sigfile)
     s = r.load()
     r.apply(s)
     end = time.time()
-    print('[Rizzo ^_^] Signatures applied in %.2f seconds' % (end - start))
+    print('[Rizzo] Signatures applied in %.2f seconds' % (end - start))
 
 
 class RizzoActionHandlerLoad(idaapi.action_handler_t):
@@ -521,13 +521,13 @@ class RizzoPlugin(idaapi.plugin_t):
 
     def __init__(self):
         print("\n================================================================================")
-        print("[Rizzo ^_^] Rizzo plugin by @devttys0, @Craig Heffner, @Reverier-Xu for IDA 7.4+")
-        print("[Rizzo =_=] Loading Rizzo...")
+        print("[Rizzo] Rizzo plugin by @devttys0, @Craig Heffner, @Reverier-Xu for IDA 7.4+")
+        print("[Rizzo] Loading Rizzo...")
         self.menu_context_load_action = idaapi.action_desc_t('rizzo:load', 'Rizzo signature file...', RizzoActionHandlerLoad())
         self.menu_context_produce_action = idaapi.action_desc_t('rizzo:produce', 'Rizzo signature file...', RizzoActionHandlerProduce())
         idaapi.register_action(self.menu_context_load_action)
         idaapi.register_action(self.menu_context_produce_action)
-        print("[Rizzo ^_^] Rizzo is Ready!")
+        print("[Rizzo] Rizzo is Ready!")
 
     def init(self):
         idaapi.attach_action_to_menu('File/Load file/Rizzo signature file...', 'rizzo:load', idaapi.SETMENU_APP)
