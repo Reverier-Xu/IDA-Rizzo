@@ -521,7 +521,7 @@ class RizzoPlugin(idaapi.plugin_t):
 
     def __init__(self):
         print("\n================================================================================")
-        print("[Rizzo ^_^] Rizzo plugin by @devttys0, @Craig Heffner, Reverier-Xu for IDA 7.4+")
+        print("[Rizzo ^_^] Rizzo plugin by @devttys0, @Craig Heffner, @Reverier-Xu for IDA 7.4+")
         print("[Rizzo =_=] Loading Rizzo...")
         self.menu_context_load_action = idaapi.action_desc_t('rizzo:load', 'Rizzo signature file...', RizzoActionHandlerLoad())
         self.menu_context_produce_action = idaapi.action_desc_t('rizzo:produce', 'Rizzo signature file...', RizzoActionHandlerProduce())
