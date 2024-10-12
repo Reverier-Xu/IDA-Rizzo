@@ -25,10 +25,10 @@
 #
 # This version of Rizzo is ported to IDA 7.4+.
 #
-# Reverier-Xu from L-team, XDU, 2021-02-24
 #
 # @ Craig Heffner
 # @ devttys0
+# @ Reverier
 ##########################################################################
 
 import collections
